@@ -48,21 +48,21 @@ Build the "Hello World" binary. The binary will be generated in the "build/" dir
 
 ### App Version 1
 
-To specify the app version, run ```idf.py menuconfig``` and enable the option **Application Manager -> Get the project version from Kconfig**. Now a new option appears that says **Project version**, which is set to 1 by default. Leave it as is. Exit the config menu and make sure to **save your changes**. Re-run the build command ```idf.py build``` to incorporate these changes into the firmware. Please copy this image/firmware, which is located in the  to the server directory /home/iot/server.
+To specify the app version, run settings and enable the option **Application Manager -> Get the project version from Kconfig**. Now a new option appears that says **Project version**, which is set to 1 by default. Leave it as is. Exit the config menu and make sure to **save your changes**. Re-run the build command to incorporate these changes into the firmware. Please copy this image/firmware, which is located in the  to the server directory /home/iot/server.
 
-Optionally, you can run this firmware now to confirm that the app detects the version. Run ```idf.py flash monitor``` to upload the firmware and monitor the console output from the device. In the bootloader log, you should see the version detection, as shown below:
+Optionally, you can run this firmware now to confirm that the app detects the version. Upload the firmware and monitor the console output from the device. In the bootloader log, you should see the version detection, as shown below:
 
 ![Hello World Version 1](./images/hello-world-version-1.png)
 
 ### App Version 2 / Security Version 1
 
-Now we will change the app version to 2 and add the anti-rollback support, which depends on a _security version_ that is separate from the app version. Open the config menu again by running ```idf.py menuconfig```. First change the app version by setting **Application Manager -> Project version** to 2. Now go to **Bootloader config** and enable the option **Enable app rollback support**. Note that this reveals a new option, **Enable app anti-rollback support**. Make sure to enable this new option. To set the security version, set **eFuse secure version of app** to 1. Finally, make sure to enable **Emulate operations with efuse secure version(only text)**. _If you do not do this, then the anti-rollback support and secure version are saved in the hardware efuse rather than the software, and the changes will be irreversible_.
+Now we will change the app version to 2 and add the anti-rollback support, which depends on a _security version_ that is separate from the app version. Open the config menu again by running settings. First change the app version by setting **Application Manager -> Project version** to 2. Now go to **Bootloader config** and enable the option **Enable app rollback support**. Note that this reveals a new option, **Enable app anti-rollback support**. Make sure to enable this new option. To set the security version, set **eFuse secure version of app** to 1. Finally, make sure to enable **Emulate operations with efuse secure version(only text)**. _If you do not do this, then the anti-rollback support and secure version are saved in the hardware efuse rather than the software, and the changes will be irreversible_.
 
 There is more to do before we leave the config. Navigate to **Partition Table -> Partition Table** and change it to "Custom partition table CS". Apps with anti-rollback support require a different partition table than the default. I have already added the required partition table in the file "partitions.csv".
 
-Now you can exit and save the changes to the configuration. Run ```idf.py build``` to rebuild "Hello World". Copy this to the server directory by running ```cp build/hello-world.bin ../server/hello-world-version-2.bin```.
+Now you can exit and save the changes to the configuration. Rebuild "Hello World". Copy this to the server directory by running ```cp build/hello-world.bin ../server/hello-world-version-2.bin```.
 
-Optionally, you can run this firmware now to confirm that the app detects the version. Run ```idf.py erase_flash``` to erase the previous firmware off the chip. Then run ```idf.py flash monitor``` to upload the firmware and monitor the console output from the device. In the bootloader log, you should see both the app version and the security version, as shown below:
+Optionally, you can run this firmware now to confirm that the app detects the version. Upload the firmware and monitor the console output from the device. In the bootloader log, you should see both the app version and the security version, as shown below:
 
 ![Hello World Version 2](./images/hello-world-version-2.png)
 
@@ -92,14 +92,14 @@ The app version is stored in a text file called "version.txt" and will be compil
 
 ### Updating to a New App Version
 
-Open the config menu by running ```idf.py menuconfig``` and change the following settings:
+Open the config menu by running settings and change the following settings:
 
 * **Serial flasher config -> Flash size**: change to 4 MB to support the larger image size.
 * **Partition Table -> Partition Table**: change to "Factory app, two OTA definitions"
 * **Example Configuration -> Firmware Upgrade URL**: change to "https://_\<your IP\>_:8070/hello-world-version-1.bin"
 * **Example Connection Configuration**: set your WiFi SSID and WiFi Password
 
-Build and run your app using ```idf.py flash monitor```.
+Build and run your app.
 
 Although the process is very similar to the previous example, you may notice 2 points of interest. First, we can see that the app version is detected during the compilation, as shown in the output from the build step:
 
@@ -111,7 +111,7 @@ Second, when the firmware is running, after it connects to the HTTPS server and 
 
 ### Trying to Update to the Same App Version
 
-Now we will see what happens when the current firmware and the new firmware have the same version. Change the value of "version.txt" to 1 by running ```echo 1 > version.txt```, and build and run your app using ```idf.py flash monitor```.
+Now we will see what happens when the current firmware and the new firmware have the same version. Change the value of "version.txt" to 1 by running ```echo 1 > version.txt```, and build and run your app.
 
 You will notice that although the new firmware downloads successfully, we get a warning indicating that the new version is the same as the running version, so the OTA process does not complete:
 
@@ -119,7 +119,7 @@ You will notice that although the new firmware downloads successfully, we get a 
 
 ### Updating to a Previous App Version (No Anti-Rollback)
 
-Now we will see what happens when the current firmware has a larger app version than the new firmware. Change the value of "version.txt" to 2 by running ```echo 2 > version.txt```. Now build and run the app using ```idf.py flash monitor```.
+Now we will see what happens when the current firmware has a larger app version than the new firmware. Change the value of "version.txt" to 2 by running ```echo 2 > version.txt```. Now build and run the app.
 
 The OTA process completes successfully, and the "Hello World" app runs just fine. This indicates that the anti-rollback mechanism has not been implemented.
 
@@ -129,7 +129,7 @@ In the final 2 examples, we will run the last OTA project and see the anti-rollb
 
 ### Updating to a New Security Version
 
-Open the config menu by running ```idf.py menuconfig``` and change the following settings:
+Open the config menu by running settings and change the following settings:
 
 * **Bootloader config -> Enable app rollback support**: enable
 * **Bootloader config -> Enable app anti-rollback support**: enable
@@ -139,7 +139,7 @@ Open the config menu by running ```idf.py menuconfig``` and change the following
 * **Example Configuration -> Firmware Upgrade URL**: change to "https://_\<your IP\>_:8070/hello-world-version-2.bin"
 * **Example Connection Configuration**: set your WiFi SSID and WiFi Password
 
-Build and run the app using ```idf.py flash monitor```.
+Build and run the app.
 
 When the app starts to run, you will see that the bootloader can correctly detect the security version, as shown below:
 
@@ -149,11 +149,11 @@ From here, the device should download and run the new firmware, which has a secu
 
 ### Trying to Update to a Previous Security Version (Anti-Rollback)
 
-Now we will change the security version of the firmware and see what happens when we try to down-grade to a previous security version. Open the config menu again using ```idf.py menuconfig``` and make the following change:
+Now we will change the security version of the firmware and see what happens when we try to down-grade to a previous security version. Open the config menu again using settings and make the following change:
 
 * **Bootloader config -> eFuse secure version of app**: change to 2
 
-Now build and run using ```idf.py flash monitor```.
+Now build and run.
 
 After the firmware connects to the server and downloads the OTA update, you will promptly be greeted with an error stating that the new firmware has a lower security version than the current firmware. Then the OTA update is deleted and the device reboots. This confirms that the anti-rollback mechanism works as intended.
 
