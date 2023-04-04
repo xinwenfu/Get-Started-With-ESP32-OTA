@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This page is intended to guide users through the OTA procedure for the ESP32. All referenced projects come from the [ESP-IDF OTA examples directory](https://github.com/espressif/esp-idf/tree/master/examples/system/ota), with the exception of Hello World, which can be found [here](https://github.com/espressif/esp-idf/tree/master/examples/get-started/hello_world). The assumption is that you have set up ESP-IDF to version 4.* (e.g., 4.2).
+This page is intended to guide users through the OTA procedure for the ESP32. All referenced OTA projects come from the [ESP-IDF OTA examples](https://github.com/espressif/esp-idf/tree/master/examples/system/ota). The Hello World is from [ESP-IDF gello world project](https://github.com/espressif/esp-idf/tree/master/examples/get-started/hello_world). 
 
 The purpose of OTA is to update the firmware of an IoT device (such as ESP32) remotely and without user interaction. The ESP32 OTA mechanism supports HTTPS to securely transmit firmware over the network. The OTA mechanism can also check the security version of the firmware and compare it with the current version. Then the device may only load the new firmware if it the security version is newer than the current version — a feature known as "anti-rollback".
 
@@ -12,10 +12,7 @@ We will see three examples. Aside from using different APIs, the major differenc
 
 #### Downloading examples
 
-You can download all examples with the following command.
-```
-git clone https://github.com/PBearson/Get-Started-With-ESP32-OTA.git
-```
+The hello world project is in **/home/iot/esp/esp-idf/examples/get-started/hello_world**.
 
 But really, we only need the hello_world example since all other examples are part of the Espressif IoT Development Framework (esp-idf) already installed. But go ahead to download all examples in this repository so that you get the hello_world example easily. If interested, please refer to the [original OTA example docs](https://github.com/espressif/esp-idf/tree/master/examples/system/ota).
 
