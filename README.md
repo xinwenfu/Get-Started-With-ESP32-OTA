@@ -10,9 +10,13 @@ We will see three examples. Aside from using different APIs, the major differenc
 
 ### Notes
 
-#### Downloading examples
+#### Example projects
 
-The hello world project is in **/home/iot/esp/esp-idf/examples/get-started/hello_world**.
+- The hello world project is in */home/iot/esp/esp-idf/examples/get-started/hello_world*
+- All OTA projects are in */home/iot/esp/esp-idf/examples/system/ota*, including
+  - advanced_https_ota
+  - native_ota_example
+  - simple_ota_example
 
 But really, we only need the hello_world example since all other examples are part of the Espressif IoT Development Framework (esp-idf) already installed. But go ahead to download all examples in this repository so that you get the hello_world example easily. If interested, please refer to the [original OTA example docs](https://github.com/espressif/esp-idf/tree/master/examples/system/ota).
 
