@@ -1,12 +1,19 @@
 # Secure ESP32 OTA through HTTPS
 
-## Introduction
 
 This page is intended to guide users through the OTA procedure for the ESP32. All referenced OTA projects come from the [ESP-IDF OTA examples](https://github.com/espressif/esp-idf/tree/master/examples/system/ota). The Hello World is from [ESP-IDF gello world project](https://github.com/espressif/esp-idf/tree/master/examples/get-started/hello_world). 
 
 The purpose of OTA is to update the firmware of an IoT device (such as ESP32) remotely and without user interaction. The ESP32 OTA mechanism supports HTTPS to securely transmit firmware over the network. The OTA mechanism can also check the security version of the firmware and compare it with the current version. Then the device may only load the new firmware if it the security version is newer than the current version — a feature known as "anti-rollback".
 
 We will see three examples. Aside from using different APIs, the major differences are that simple_ota_example does not do a version check, native_ota_example does a version check (but not anti-rollback, so older firmware versions can still be downloaded), and advanced_https_ota supports both version check and anti-rollback. advanced_https_ota can also detect if the firmware has not been fully downloaded.
+
+## Introduction
+
+### Work flow
+The picture below shows the high-level work flow of this OTA project.
+- The laptop flashes the OTA enabled firmware into the ESP32
+- The laptop runs a web server hosting a new firmware
+- The ESP32 uses the OTA to upgrade its firmware
 
 <img src="images/OTA.png" width=480>
 
