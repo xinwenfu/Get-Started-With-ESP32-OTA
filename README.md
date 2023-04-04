@@ -9,10 +9,10 @@ We will see three examples. Aside from using different APIs, the major differenc
 
 ## Introduction
 
-### Work flow
-The picture below shows the high-level work flow of this OTA project.
-- The laptop flashes the OTA enabled firmware into the ESP32
+### Workflow
+The picture below shows the high-level workflow of an OTA project.
 - The laptop runs a web server hosting a new firmware
+- The laptop flashes the OTA enabled firmware into the ESP32
 - The ESP32 uses the OTA to upgrade its firmware
 
 <img src="images/OTA.png" width=480>
