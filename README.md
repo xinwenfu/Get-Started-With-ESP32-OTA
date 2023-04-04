@@ -18,8 +18,6 @@ We will see three examples. Aside from using different APIs, the major differenc
   - native_ota_example
   - simple_ota_example
 
-But really, we only need the hello_world example since all other examples are part of the Espressif IoT Development Framework (esp-idf) already installed. But go ahead to download all examples in this repository so that you get the hello_world example easily. If interested, please refer to the [original OTA example docs](https://github.com/espressif/esp-idf/tree/master/examples/system/ota).
-
 #### Bridged Adapter for Ubuntu
 Before you move forward, make sure the provided Ubuntu VM uses the bridged adapter so that it will get an IP, which will be in the same subnet of our IoT kit. Here is how you configure it:
 * VirtualBox Manager -> Ubuntu IoT -> Settings -> Network -> Adapter 1 -> Bridged Adapter
@@ -37,7 +35,7 @@ We are going to prepare 3 different versions of the "Hello World" firmware: 1) n
 
 ### Unversioned App
 
-Navigate to the "hello_world/" directory and run ```idf.py build```, which will build the "Hello World" binary. The binary will be generated in the "build/" directory, under the filename "hello-world.bin". Please copy this image/firmware to our server directory /home/iot/server.
+Build the "Hello World" binary. The binary will be generated in the "build/" directory, under the filename "hello-world.bin". Please copy hello-world.bin to our server directory /home/iot/server.
 
 ### App Version 1
 
@@ -73,9 +71,9 @@ This will generate an RSA keypair and a self-signed server certificate. You will
 
 Leave the server running and return to the original terminal. We are going to run the first OTA project now. Navigate to the "simple_ota_example" directory. Make a new directory called "server_certs" under by running ```mkdir server_certs``` if you do not have one . Now copy the server certificate to this new directory by running ```cp ../server/ca_cert.pem server_certs/```. This is necessary to authenticate the server during the TLS handshake.
 
-Open the config menu by running ```idf.py menuconfig```. Navigate to **Example Configuration** and change **firmware upgrade url endpoint** to "https://_\<your IP\>_:8070/hello-world-unversioned.bin". Navigate to **Example Connection Configuration** and update the WiFi credentials with your SSID and password. Finally, navigate to **Partition Table -> Partition Table** and change it "Factory app, two OTA definitions". Now exit the configuration and save your changes.
+Open the config menu. Navigate to **Example Configuration** and change **firmware upgrade url endpoint** to "https://_\<your IP\>_:8070/hello-world-unversioned.bin". Navigate to **Example Connection Configuration** and update the WiFi credentials with your SSID and password. Finally, navigate to **Partition Table -> Partition Table** and change it "Factory app, two OTA definitions" if needed. Now exit the configuration and save your changes.
 
-Build and run the firmware using ```idf.py flash monitor```. The app will start by running the OTA firmware, which will try to connect to your running HTTPS server. If all goes well, you will see the ESP32 download the "hello-world-unversioned.bin" firmware, reset the system, and begin running the updated firmware.
+Build, run and flash the firmware. The app will start by running the OTA firmware, which will try to connect to your running HTTPS server. If all goes well, you will see the ESP32 download the "hello-world.bin" firmware, reset the system, and begin running the updated firmware.
 
 ## Run the native_ota_example Project
 
