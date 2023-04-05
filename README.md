@@ -35,7 +35,7 @@ For each example project, make sure you change the flash size to 4MB since the O
 #### Simple https web server
 We will start a simple https web server using openssl. You can create a folder called "server" within /home/iot. The server folder will host the https web server's private key, self-signed certificate and the firmware for upgrading.
 
-## Prepare the OTA Firmware Images
+## Prepare the OTA Firmware Image
 
 Build the "Hello World" binary. The binary will be generated in the "build/" directory, under the filename "hello-world.bin". Please copy hello-world.bin to the server directory /home/iot/server.
 
