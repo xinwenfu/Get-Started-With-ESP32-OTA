@@ -25,8 +25,9 @@ The picture below shows the high-level workflow of an OTA project.
 - All OTA projects are in */home/iot/esp/esp-idf/examples/system/ota*, including simple_ota_example, which we will use.
 
 #### Bridged Adapter for Ubuntu
-Before you move forward, make sure the provided Ubuntu VM uses the bridged adapter so that it will get an IP, which will be in the same subnet of our IoT kit. Here is how you configure it:
+Before you move forward, make sure the provided Ubuntu VM uses the bridged adapter so that it will get an IP, which will be in the same subnet of our IoT kit. Here is how you configure it when the Ubuntu VM is turned off:
 * VirtualBox Manager -> Ubuntu IoT -> Settings -> Network -> Adapter 1 -> Bridged Adapter
+* VirtualBox Manager -> Ubuntu IoT -> Settings -> Network ->  Advanced -> Press the cycle button to get a random MAC so that every Ubuntu VM has a different IP.
 
 #### Flash size
 For each example project, make sure you change the flash size to 4MB since the OTA needs more flash. Here is how you do it with the settings of an example project:
